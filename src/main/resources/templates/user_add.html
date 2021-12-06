@@ -1,0 +1,77 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment_header::common_header"></head>
+<body>
+	<div th:replace="fragments/menu::header"></div>
+	<div class="row">
+		<div th:if="${registered == false}" class="col-md-12 content alert-holder">
+			<div class="alert alert-danger">
+				<h4 th:text="#{registration.error}"></h4>
+			</div>
+		</div>
+		<div th:if="${registered == true}" class="col-md-12 content alert-holder">
+			<div class="alert alert-success" th:text="#{registration.ok}" role="alert">registration.ok</div>
+		</div>
+		<div class="col-md-5 content form-content">
+			<form class="registration-form" action="user" th:object="${user}" method="post">
+				<h3 th:text="#{user.add}"></h3>
+				<div class="form-group">
+					<label th:text="#{user.firstname}">user.firstname</label>
+					<input class="form-control" type="text" th:field="*{firstname}" id="user-add-firstname" autocomplete="off" />
+					<p class="error-msg" th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}" th:text="#{user.firstname.error}"></p>
+					<label th:text="#{user.lastname}">user.lastname</label>
+					<input class="form-control" type="text" th:field="*{lastname}" id="user-add-lastname" autocomplete="off" />
+					<p class="error-msg" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}" th:text="#{user.lastname.error}"></p>
+					<label th:text="#{user.midlename}">user.midlename</label>
+					<input class="form-control" type="text" th:field="*{midlename}" id="user-add-midlename" autocomplete="off" />
+					<p class="error-msg" th:if="${#fields.hasErrors('midlename')}" th:errors="*{midlename}" th:text="#{user.midlename.error}"></p>
+					<label th:text="#{user.ssn}">user.lastname</label>
+					<input class="form-control" type="text" th:field="*{ssn}" id="user-add-ssn" autocomplete="off" />
+				</div>
+				<button type="submit" class="btn btn-success btn-block" th:text="#{user.create}"></button>
+			</form>
+		</div>
+	</div>
+	<div class="col-md-9 content form-content">
+		<h3 th:text="#{user.list}">user.list</h3>
+		<table id="users-table" th:if="${not #lists.isEmpty(userList)}" class="table table-hover description-tbl">
+			<thead>
+				<tr>
+					<th th:text="#{user.id}">user.id</th>
+					<th th:text="#{user.firstname}">user.firstname</th>
+					<th th:text="#{user.lastname}">user.lastname</th>
+					<th th:text="#{user.midlename}">user.midlename</th>
+					<th th:text="#{user.ssn}">user.ssn</th>
+					<th th:text="#{user.roles}">user.roles</th>
+					<th th:text="#{user.courses}">user.courses</th>
+				</tr>
+			</thead>
+			<tbody id="users-table-body">
+				<tr th:each="user : ${userList}">
+					<td>
+						<p th:text="${user.id}"></p>
+					</td>
+					<td>
+						<p th:text="${user.firstname}"></p>
+					</td>
+					<td>
+						<p th:text="${user.lastname}"></p>
+					</td>
+					<td>
+						<p th:text="${user.midlename}"></p>
+					</td>
+					<td>
+						<p th:text="${user.ssn}"></p>
+					</td>
+					<td><th:block th:each="role : ${user.roleDTOs}">
+							<p th:text="${role.name}"></p>
+						</th:block></td>
+					<td><th:block th:each="course : ${user.courseDTOs}">
+							<p th:text="${course.name} + '&nbsp;|&nbsp;' + ${course.description}"></p>
+						</th:block></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

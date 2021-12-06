@@ -1,0 +1,12 @@
+<div th:fragment="header">
+	<div style="text-align: right; padding: 5px; margin: 5px 0px; background: #ccc;">
+		<a th:href="@{''(lang=en)}">English</a> | <a th:href="@{''(lang=ee)}">Eesti</a> | <a th:href="@{''(lang=ru)}">Русский</a>
+	</div>
+	<div class="nav">
+		<a class="logo" th:href="@{/}" th:text="#{logo.title}">logo.title</a>
+		<div class="nav-menu">
+			<a class="nav-item" th:href="@{/user}" th:text="#{header.menu.user}"></a> <a class="nav-item" th:href="@{/course}" th:text="#{header.menu.course}"></a>
+		</div>
+	</div>
+</div>
+<div th:fragment="example">ZXCVBNMJKIJUYHFDRTGYHJUI</div>

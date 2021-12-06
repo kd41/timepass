@@ -1,0 +1,60 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment_header::common_header"></head>
+<body>
+	<div th:replace="fragments/menu::header"></div>
+	<div class="row">
+		<div th:if="${registered == false}" class="col-md-12 content alert-holder">
+			<div class="alert alert-danger">
+				<h4 th:text="#{registration.error}"></h4>
+			</div>
+		</div>
+		<div th:if="${registered == true}" class="col-md-12 content alert-holder">
+			<div class="alert alert-success" th:text="#{registration.ok}" role="alert">registration.ok</div>
+		</div>
+		<div class="col-md-5 content form-content">
+			<form class="registration-form" action="course" th:object="${course}" method="post">
+				<h3 th:text="#{course.add}"></h3>
+				<div class="form-group">
+					<label th:text="#{course.name}">course.name</label>
+					<input class="form-control" type="text" th:field="*{name}" id="course-add-name" autocomplete="off" />
+					<p class="error-msg" th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:text="#{course.name.error}"></p>
+					<label th:text="#{course.description}">course.description</label>
+					<input class="form-control" type="text" th:field="*{description}" id="course-add-description" autocomplete="off" />
+					<p class="error-msg" th:if="${#fields.hasErrors('description')}" th:errors="*{description}" th:text="#{course.description.error}"></p>
+				</div>
+				<button type="submit" class="btn btn-success btn-block" th:text="#{course.create}"></button>
+			</form>
+		</div>
+	</div>
+	<div class="col-md-9 content form-content">
+		<h3 th:text="#{course.list}">course.list</h3>
+		<table id="courses-table" th:if="${not #lists.isEmpty(courseList)}" class="table table-hover description-tbl">
+			<thead>
+				<tr>
+					<th th:text="#{course.id}">course.id</th>
+					<th th:text="#{course.name}">course.name</th>
+					<th th:text="#{course.description}">course.description</th>
+					<th th:text="#{course.users}">course.users</th>
+				</tr>
+			</thead>
+			<tbody id="courses-table-body">
+				<tr th:each="course : ${courseList}">
+					<td>
+						<p th:text="${course.id}"></p>
+					</td>
+					<td>
+						<p th:text="${course.name}"></p>
+					</td>
+					<td>
+						<p th:text="${course.description}"></p>
+					</td>
+					<td><th:block th:each="user : ${course.userDTOs}">
+							<p th:text="${user.firstname} + ' ' + ${user.lastname}"></p>
+						</th:block></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

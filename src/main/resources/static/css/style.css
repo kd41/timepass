@@ -1,0 +1,219 @@
+/*Main layout*/
+body {
+    padding: 40px;
+    background-color: white;
+}
+
+.container-fluid {
+    padding: 0;
+}
+
+.content {
+    padding: 20px;
+    background-color: #f7f6f4;
+    border: 2px solid white;
+}
+
+.nav {
+    background-color: #a52222;
+    margin: 2px 0;
+    border-radius: 3px;
+}
+
+.nav-menu {
+    height: 100%;
+}
+
+.row {
+    margin: 0 10px;
+}
+
+.side-nav {
+    min-width: 230px;
+}
+
+.table-holder {
+    max-width: 350px;
+    padding: 2px;
+    margin: auto;
+}
+
+.alert {
+    margin: 2px;
+}
+
+.alert-holder {
+    padding: 0;
+}
+
+/*Text*/
+h3 {
+    padding: 10px;
+}
+
+label {
+    min-width: 100px;
+    color: #177c40;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.extra-info {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.result-message {
+    visibility: hidden;
+}
+
+.error-msg {
+    color: #bc252a;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.sucess-lbl {
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    background-color: rgba(10, 150, 99, 0.8);
+    border-radius: 3px;
+    width: inherit;
+    margin: auto;
+    padding: 5px;
+}
+
+/*Table*/
+
+.description-tbl td {
+    padding: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #68575a;
+}
+
+.bottom-separated-tbl {
+    border-bottom: 2px solid #cecece;
+    width: 350px;
+    margin: auto;
+    caption-side: top;
+}
+
+/*Lists*/
+ul {
+    list-style-type: none;
+    padding-left: 0;
+    max-height: 400px;
+}
+
+.menu-list-item {
+    border-bottom: 1px solid #cecece;
+    padding: 5px;
+}
+
+    .menu-list-item:hover {
+        background-color: rgba(206, 206, 206, 0.2);
+    }
+
+.btn-holder{
+padding: 0;
+display: inline-block;
+}
+/*Buttons/Links*/
+.btn-attention {
+    background-color: #a52222;
+    color: white;
+    font-weight: bold;
+    margin: 1px;
+}
+
+    .btn-attention:hover {
+        background-color: #c63333;
+        color:white;
+        font-weight:bold;
+    }
+
+.info-link {
+    color: #bc252a;
+    text-decoration: none;
+    font-size: 18px;
+    display: block;
+}
+
+    .info-link:hover {
+        color: #bc252a;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+.logo {
+    background-color: #d93748;
+    padding: 10px;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    border-radius: 3px;
+    margin: 10px 50px 10px 30px;
+    text-align: center;
+}
+
+    .logo:hover {
+        background-color: #c52638;
+        padding: 10px;
+        color: white;
+        font-size: 30px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+.nav-item {
+    color: white;
+    background-color: #af2323;
+    padding: 30px 20px;
+    height: 90px;
+    display: inline-block;
+}
+
+    .nav-item:hover {
+        text-decoration: none;
+        color: white;
+        background-color: #c52638;
+    }
+
+/*Inputs*/
+.form-group {
+    display: block;
+    max-width: 300px;
+    min-height: 80px;
+}
+
+.registration-form {
+    display: block;
+    margin: auto;
+    margin: 0 auto;
+    width: 90%
+}
+
+.form-content {
+    min-width: 460px;
+}
+
+/*Small devices*/
+@media screen and (max-width: 720px) {
+    .nav {
+        height: auto;
+        flex-direction: column;
+    }
+
+    .nav-item {
+        height: auto;
+        padding: 10px;
+        display: block;
+        border-radius: 3px;
+        margin: 3px;
+    }
+}
