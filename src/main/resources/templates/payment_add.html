@@ -1,0 +1,74 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment_header::common_header"></head>
+<body>
+	<div th:replace="fragments/menu::header"></div>
+	<div class="row">
+		<div th:if="${registered == false}" class="col-md-12 content alert-holder">
+			<div class="alert alert-danger">
+				<h4 th:text="#{registration.error}"></h4>
+			</div>
+		</div>
+		<div th:if="${registered == true}" class="col-md-12 content alert-holder">
+			<div class="alert alert-success" th:text="#{registration.ok}" role="alert">registration.ok</div>
+		</div>
+		<div class="col-md-5 content form-content">
+			<form class="registration-form" action="payment" th:object="${payment}" method="post">
+				<h3 th:text="#{payment.add}"></h3>
+				<div class="form-group">
+					<label th:text="#{payment.amount}">payment.amount</label>
+					<input class="form-control" type="text" th:field="*{amount}" id="payment-add-amount" autocomplete="off" />
+					<p class="error-msg" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}" th:text="#{payment.amount.error}"></p>
+					<label th:text="#{payment.currency}">payment.currency</label>
+					<select class="form-control" type="text" th:field="*{currency}" id="payment-add-currency">
+						<option th:value="'EUR'" th:text="Euro" th:selected="selected"></option>
+						<option th:value="'USD'" th:text="Dollar"></option>
+					</select>
+					<p class="error-msg" th:if="${#fields.hasErrors('currency')}" th:errors="*{currency}" th:text="#{payment.currency.error}"></p>
+					<label th:text="#{payment.description}">payment.description</label>
+					<input class="form-control" type="text" th:field="*{description}" id="payment-add-description" autocomplete="off" />
+					<p class="error-msg" th:if="${#fields.hasErrors('description')}" th:errors="*{description}" th:text="#{payment.description.error}"></p>
+				</div>
+				<button type="submit" class="btn btn-success btn-block" th:text="#{payment.create}"></button>
+			</form>
+		</div>
+	</div>
+	<div class="col-md-9 content form-content">
+		<h3 th:text="#{payment.list}">payment.list</h3>
+		<table id="payments-table" th:if="${not #lists.isEmpty(paymentList)}" class="table table-hover description-tbl">
+			<thead>
+				<tr>
+					<th th:text="#{payment.id}">payment.id</th>
+					<th th:text="#{payment.created}">payment.created</th>
+					<th th:text="#{payment.amount}">payment.amount</th>
+					<th th:text="#{payment.currency}">payment.currency</th>
+					<th th:text="#{payment.userId}">payment.userId</th>
+					<th th:text="#{payment.courseId}">payment.courseId</th>
+				</tr>
+			</thead>
+			<tbody id="payments-table-body">
+				<tr th:each="payment : ${paymentList}">
+					<td>
+						<p th:text="${payment.id}"></p>
+					</td>
+					<td>
+						<p th:text="${payment.created}"></p>
+					</td>
+					<td>
+						<p th:text="${payment.amount}"></p>
+					</td>
+					<td>
+						<p th:text="${payment.currency}"></p>
+					</td>
+					<td>
+						<p th:text="${payment.user.id}"></p>
+					</td>
+					<td>
+						<p th:text="${payment.course.id}"></p>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

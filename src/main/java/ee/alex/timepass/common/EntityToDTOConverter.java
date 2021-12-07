@@ -7,6 +7,7 @@ import java.util.List;
 import ee.alex.timepass.dto.BaseCreatedDTO;
 import ee.alex.timepass.dto.BaseDTO;
 import ee.alex.timepass.dto.CourseDTO;
+import ee.alex.timepass.dto.PaymentDTO;
 import ee.alex.timepass.dto.RoleDTO;
 import ee.alex.timepass.dto.UserCourseDTO;
 import ee.alex.timepass.dto.UserDTO;
@@ -14,6 +15,7 @@ import ee.alex.timepass.dto.UserRoleDTO;
 import ee.alex.timepass.entity.BaseCreatedEntity;
 import ee.alex.timepass.entity.BaseEntity;
 import ee.alex.timepass.entity.CourseEntity;
+import ee.alex.timepass.entity.PaymentEntity;
 import ee.alex.timepass.entity.RoleEntity;
 import ee.alex.timepass.entity.UserCourseEntity;
 import ee.alex.timepass.entity.UserEntity;
@@ -83,6 +85,15 @@ public class EntityToDTOConverter {
         dto.setName(entity.getName());
         dto.setDescription(entity.getDescription());
         dto.setUserDTOs(convertUserEntities2(entity.getUserCourses()));
+        return dto;
+    }
+
+    // CourseDTO
+    public static CourseDTO convertCourseEntity2(CourseEntity entity) {
+        CourseDTO dto = new CourseDTO();
+        convertBaseEntity(dto, entity);
+        dto.setName(entity.getName());
+        dto.setDescription(entity.getDescription());
         return dto;
     }
 
@@ -166,6 +177,30 @@ public class EntityToDTOConverter {
         List<UserDTO> list = new ArrayList<>();
         entities.forEach(entity -> {
             list.add(convertUserEntity2(entity.getUser()));
+        });
+        return list;
+    }
+
+    // PaymentDTO
+    public static PaymentDTO convertPaymentEntity(PaymentEntity entity) {
+        PaymentDTO dto = new PaymentDTO();
+        convertBaseCreatedEntity(dto, entity);
+        dto.setAmount(entity.getAmount());
+        dto.setCurrency(entity.getCurrency());
+        dto.setDescription(entity.getDescription());
+        dto.setUser(convertUserEntity2(entity.getUser()));
+        dto.setCourse(convertCourseEntity2(entity.getCourse()));
+        return dto;
+    }
+
+    // List<PaymentDTO>
+    public static List<PaymentDTO> convertPaymentEntities(List<PaymentEntity> entities) {
+        if (entities == null) {
+            return Collections.emptyList();
+        }
+        List<PaymentDTO> list = new ArrayList<>();
+        entities.forEach(entity -> {
+            list.add(convertPaymentEntity(entity));
         });
         return list;
     }
